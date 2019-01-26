@@ -1,28 +1,35 @@
-from game import Card
+from card import Card
 from player import Player
+from game import Game
 
-player1=()
+"""
+Player1 = Player("huseyin")
+Player2 = Player("ayse")
 
 
-card1=Card("huseyin","card1",5,5,5)
-card2=Card("huseyin","card2",5,5,5)
 
-card3=Card("ayse","card3",5,5,5)
-card4=Card("ayse","card4",5,5,5)
+Card1 = Card("huseyin", "Card1", 5, 4, 5)
+Card2 = Card("huseyin", "Card2", 5, 5, 10)
 
-cards=[card1,card2,card3,card4]
+Card3 = Card("ayse", "Card3", 5, 5, 5)
+Card4 = Card("ayse", "Card4", 5, 5, 5)
+
+cards = [Card1, Card2, Card3, Card4]
 
 print("Enter first your card name and second your target card name")
-activeCard=Card()
-targetCard=Card()
-activeCard.name=input()
-targetCard.name=input()
+ActiveCard = Card(name=input())
+TargetCard = Card(name=input())
 
-if(card1==activeCard):
-    activeCard=card1
-if(card2==targetCard):
-    targetCard=card1
+if Card1 == ActiveCard:
+    ActiveCard = Card1
+if Card2 == TargetCard:
+    TargetCard = Card2
 
-Card.attack(activeCard,targetCard)
+Card.attackToCard(ActiveCard, TargetCard)
+"""
 
+newGame=Game()
+newGame.begin()
+
+a=input()
 
