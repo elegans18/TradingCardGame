@@ -3,36 +3,29 @@ import random as rnd
 
 class Deck:
     def __init__(self):
-        self.__cards = []
+        self.cards = []
 
     def returnDeck(self):
-        return self.__cards 
+        return self.cards 
 
     def deck(self, player):
-        k=0
-        for i in range(2):
-            self.__cards.append(Card(player, "card" + str(k), 0, rnd.randint(0,k+2), rnd.randint(1,k+3)))
-            k=k+1
-        for i in range(2):
-            self.__cards.append(Card(player, "card" + str(k), 1, rnd.randint(1,k+3), rnd.randint(2,k+3)))
-            k=k+1
-        for i in range(3):
-            self.__cards.append(Card(player, "card" + str(k), 2, rnd.randint(2,k+4), rnd.randint(2,k+4)))
-            k=k+1
-        for i in range(4):
-            self.__cards.append(Card(player, "card" + str(k), 3, rnd.randint(2,k+5), rnd.randint(2,k+4)))
-            k=k+1            
-        for i in range(3):
-            self.__cards.append(Card(player, "card" + str(k), 4, rnd.randint(3,k+6), rnd.randint(2,k+5)))
-            k=k+1
-        for i in range(2):
-            self.__cards.append(Card(player, "card" + str(k), 5, rnd.randint(3,k+7), rnd.randint(3,k+5)))
-            k=k+1
-        for i in range(2):
-            self.__cards.append(Card(player, "card" + str(k), 6, rnd.randint(4,k+8), rnd.randint(3,k+6)))
-            k=k+1
-        self.__cards.append(Card(player, "card" + str(k), 7, rnd.randint(4,k+9), rnd.randint(3,k+7)))
-        k=k+1
-        self.__cards.append(Card(player, "card" + str(k), 8, rnd.randint(5,k+10), rnd.randint(3,k+8)))
+        for i in range(0,2):
+            self.cards.append(Card(player, "card" + str(i), 0, rnd.randint(0, i + 2), rnd.randint(1, i + 3)))
+        for i in range(2,4):
+            self.cards.append(Card(player, "card" + str(i), 1, rnd.randint(1, i + 3), rnd.randint(2, i + 3)))
+        for i in range(4,7):
+            self.cards.append(Card(player, "card" + str(i), 2, rnd.randint(2, i + 4), rnd.randint(2, i + 4)))
+        for i in range(7,11):
+            self.cards.append(Card(player, "card" + str(i), 3, rnd.randint(2, i + 5), rnd.randint(2, i + 4)))          
+        for i in range(11,14):
+            self.cards.append(Card(player, "card" + str(i), 4, rnd.randint(3, i + 6), rnd.randint(2, i + 5)))
+        for i in range(14,16):
+            self.cards.append(Card(player, "card" + str(i), 5, rnd.randint(3, i + 7), rnd.randint(3, i + 5)))
+        for i in range(16,18):
+            self.cards.append(Card(player, "card" + str(i), 6, rnd.randint(4, i + 8), rnd.randint(3, i + 6)))
+        self.cards.append(Card(player, "card" + str(18), 7, rnd.randint(4, 18 + 9), rnd.randint(3, 18 + 7)))
+        self.cards.append(Card(player, "card" + str(19), 8, rnd.randint(5, 19 + 10), rnd.randint(3, 19 + 8)))
+
+
 
 

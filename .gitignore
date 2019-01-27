@@ -3,3 +3,5 @@ main.cpython-37.pyc
 settings.json
 __pycache__/game.cpython-37.pyc
 __pycache__/player.cpython-37.pyc
+__pycache__/card.cpython-37.pyc
+__pycache__/deck.cpython-37.pyc
