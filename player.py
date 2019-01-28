@@ -2,10 +2,13 @@ from deck import Deck
 import random as rnd
 
 class Player:
+
+    MAX_HEALTH = 30
+
     # Initializer
     def __init__(self, userName):
         self.userName = userName
-        self.health = 30
+        self.health = self.MAX_HEALTH
         self.mana = 0
         self.activeCards = []
         self.active = False
@@ -29,9 +32,9 @@ class Player:
                 self.deck.returnDeck().remove(i)              
 
 
-    def delCard(self, card):
-        self.activeCards.remove(card.name)
-        card.userName = ""
+    #def delCard(self, card):
+        #self.activeCards.remove(card.name)
+        #card.userName = ""
 
     def playerDeck(self):
         self.deck=Deck()
@@ -47,3 +50,20 @@ class Player:
         for i in self.activeCards:
             if i.name == card:
                 return i
+
+    def addToActiveCard(self):
+        self.activeCards.append(rnd.choice(self.deck.cards))
+        
+    def delCard(self):
+        for i in self.playerActiveCardsRt():
+            if i.health <= 0:
+                self.activeCards.remove(i)
+
+    def writeActiveCards(self):
+        for i in self.playerActiveCardsRt():
+            print("{} 's active cards :  card name: {} mana: {} , attack: {} , health: {}".format(self.userName,i.name,i.mana,i.att,i.health))
+
+    def userInfo(self):
+        print("{} ' health: {}, mana: {}".format(self.userName,self.health,self.mana))
+
+    
