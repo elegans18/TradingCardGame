@@ -8,6 +8,7 @@ class Deck:
     def returnDeck(self):
         return self.cards 
 
+    #username name mana att health
     def deck(self, player):
         for i in range(0,2):
             self.cards.append(Card(player, "card" + str(i), 0, rnd.randint(0, i + 2), rnd.randint(1, i + 3)))

@@ -4,12 +4,15 @@ import random as rnd
 class Player:
 
     MAX_HEALTH = 30
+    MAX_USER_MANA = 10
+    MAX_ACTIVE_CARDS = 5
 
     # Initializer
     def __init__(self, userName):
         self.userName = userName
         self.health = self.MAX_HEALTH
         self.mana = 0
+        self.activeMana = 0
         self.activeCards = []
         self.active = False
         self.deck = None
@@ -19,7 +22,8 @@ class Player:
 
     def makeActivate(self):
         self.active=True
-        self.mana += 1        
+        if(self.mana<=self.MAX_USER_MANA):
+            self.mana += 1        
 
     def makeDeactive(self):
         self.active=False
