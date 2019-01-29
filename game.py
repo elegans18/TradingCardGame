@@ -15,9 +15,9 @@ class Game:
         self.Player1.playerDeck()
         self.Player2.playerDeck()
         for aCard in range(3):
-            self.Player1.addCard()
+            self.Player1.addToActiveCard()
         for bCard in range(3):
-            self.Player2.addCard()
+            self.Player2.addToActiveCard()
 
     def playerInfo(self):
         self.Player1.userInfo()
@@ -53,8 +53,10 @@ class Game:
                 print(self.Player1.userName + " choice the card")
                 choice = input()              
                 selectedCard = self.Player1.activeCardSelected(choice) 
-                if selectedCard.mana <= self.Player1.activeMana:        
-                    selectedCard.attackToOpponent(self.Player2)              
+                if selectedCard.mana <= self.Player1.activeMana:                           
+                    selectedCard.attackToOpponent(self.Player2)
+                    self.Player1.rmvCardFromActiveCards(selectedCard) 
+                    self.Player1.activeMana -= selectedCard.mana              
                 self.playerInfo()
                 tour +=1
 
@@ -64,13 +66,13 @@ class Game:
                 choice = input()
                 selectedCard = self.Player2.activeCardSelected(choice)
                 if selectedCard.mana <= self.Player2.activeMana:        
-                    selectedCard.attackToOpponent(self.Player2)             
-                selectedCard.attackToOpponent(self.Player1)           
+                    selectedCard.attackToOpponent(self.Player1)
+                    self.Player2.rmvCardFromActiveCards(selectedCard)  
+                    self.Player2.activeMana -= selectedCard.mana                     
                 self.playerInfo()
                 tour=0
 
-            self.Player1.delCard()
-            self.Player2.delCard()   
+
 
 
             
