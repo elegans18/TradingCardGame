@@ -26,6 +26,7 @@ class Game:
         self.Player2.writeActiveCards()
 
     def player1Active(self):
+        print(self.Player1.userName + " Tour Begin!!")
         self.Player1.addToActiveCard()
         self.Player1.makeActivate()
         self.Player2.makeDeactive()
@@ -33,6 +34,7 @@ class Game:
         self.playerInfo()
 
     def player2Active(self):
+        print(self.Player2.userName + " Tour Begin!!")
         self.Player2.addToActiveCard()
         self.Player2.makeActivate()
         self.Player1.makeDeactive()
@@ -50,11 +52,10 @@ class Game:
         while self.isGameOver():
             if tour % 2 == 0:             
                 self.player1Active()
-                while self.Player1.canPlay():
-                    self.activeCards()                                      
+                while self.Player1.canPlay():                                  
                     print(self.Player1.userName + " choice the card for attack to opponent")
                     choice = input()              
-                    selectedCard = self.Player1.activeCardSelected(choice) 
+                    selectedCard = self.Player1.activeCardSelected(choice)                 
                     if selectedCard.mana <= self.Player1.activeMana:                           
                         selectedCard.attackToOpponent(self.Player2)
                         self.Player1.rmvCardFromActiveCards(selectedCard) 
@@ -67,7 +68,6 @@ class Game:
             if tour % 2 == 1:
                 self.player2Active()
                 while self.Player2.canPlay():
-                    self.activeCards()   
                     print(self.Player2.userName + " choice the card for attack to opponent")
                     choice = input()
                     selectedCard = self.Player2.activeCardSelected(choice)

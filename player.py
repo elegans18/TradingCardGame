@@ -47,8 +47,9 @@ class Player:
     def addToActiveCard(self):
         if self.checkDeck() == True:
             randomCard = rnd.choice(self.deck.cards)
-            if len(self.activeCards) > 5:
+            if len(self.activeCards) >= 5:
                 self.deck.returnDeck().remove(randomCard)
+                print(randomCard.name +"removed. You have already 5 active cards.")
             else:
                 self.activeCards.append(randomCard)
                 self.deck.returnDeck().remove(randomCard)
