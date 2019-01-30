@@ -10,10 +10,11 @@ class Card:
         self.noOfCards += 1
 
     def __eq__(self, other):
-        return self.name == other.name      
+        #compare cards
+        return self.name == other.name     
 
-#Attack to Opponent
     def attackToOpponent(self, target):
+        #Attack to Opponent
         if self.mana > 0:
             target.health = target.health-self.mana            
             if target.health <= 0:
@@ -23,6 +24,7 @@ class Card:
         #round should switch to opponent
 
     def returnName(self):
+        #return card name
         return self.name
 
 

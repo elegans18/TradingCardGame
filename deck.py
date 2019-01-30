@@ -9,6 +9,7 @@ class Deck:
 
     #username name mana att health
     def deck(self, player):
+        #create deck
         for i in range(0, 2):
             self.cards.append(Card(player, "card" + str(i), 0 ))
         for i in range(2, 4):
