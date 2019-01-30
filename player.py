@@ -21,16 +21,16 @@ class Player:
         return self.active
 
     def makeActivate(self):
-        self.active=True
-        if self.mana<=self.MAX_USER_MANA:
-            self.mana += 1     
+        self.active = True
+        if self.mana <= self.MAX_USER_MANA:
+            self.mana += 1   
         self.activeMana = self.mana   
 
     def makeDeactive(self):
-        self.active=False          
+        self.active = False          
 
     def playerDeck(self):
-        self.deck=Deck()
+        self.deck = Deck()
         self.deck.deck(self.userName)
 
     def playerDeckRt(self):
@@ -45,29 +45,37 @@ class Player:
                 return i
 
     def addToActiveCard(self):
-        randomCard = rnd.choice(self.deck.cards)
-        print(len(self.activeCards))
-        if len(self.activeCards) > 5:
-            self.deck.returnDeck().remove(randomCard)
+        if self.checkDeck() == True:
+            randomCard = rnd.choice(self.deck.cards)
+            if len(self.activeCards) > 5:
+                self.deck.returnDeck().remove(randomCard)
+            else:
+                self.activeCards.append(randomCard)
+                self.deck.returnDeck().remove(randomCard)
         else:
-            self.activeCards.append(randomCard)
-            self.deck.returnDeck().remove(randomCard)
-        
-    #This function is not use    
-    def delCard(self):
-        for i in self.playerActiveCardsRt():
-            if i.health <= 0:
-                self.activeCards.remove(i)
+            self.health -= 1
+            print(self.userName + " don't have card. Your health down to " + self.health)
 
     def rmvCardFromActiveCards(self, card):
         self.activeCards.remove(card)
 
     def writeActiveCards(self):
+        k = 1
         for i in self.playerActiveCardsRt():
-            print("{} 's active cards :  card name: {} mana: {} , attack: {}".format(self.userName,i.name,i.mana,i.att))
+            print(str(k) + " {} 's Active cards :  Card name: {}, Mana: {}, Attack: {}".format(self.userName, i.name, i.mana, i.mana))
+            k += 1
 
     def userInfo(self):
-        print("{} ' health: {}, mana: {}, active Mana{}".format(self.userName,self.health,self.mana,self.activeMana))
+        print("{} ' Health: {}, Mana: {}, Active mana {}".format(self.userName, self.health, self.mana, self.activeMana))
 
+    def checkDeck(self):
+        return len(self.deck.returnDeck()) != 0
+
+    def canPlay(self):        
+        for i in self.playerActiveCardsRt():
+            if self.activeMana > i.mana:
+                return True
+
+        
 
     
