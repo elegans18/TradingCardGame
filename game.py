@@ -5,9 +5,11 @@ from deck import Deck
 class Game:
     def __init__(self):
         print("Game begin!!")
-        self.Player1 = Player("huseyin")
+        print("Enter Player1 Name:")        
+        self.Player1 = Player(input())
         print(self.Player1.userName + " created.")
-        self.Player2 = Player("ismail")
+        print("Enter Player2 Name:")        
+        self.Player2 = Player(input())
         print(self.Player2.userName + " created.")
 
     def begin(self):
