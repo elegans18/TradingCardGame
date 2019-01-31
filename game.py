@@ -1,6 +1,6 @@
-from player import Player
-from deck import Deck
-
+import random as rnd 
+from player import Player 
+from deck import Deck 
 
 class Game:
     def __init__(self):
@@ -10,76 +10,91 @@ class Game:
         self.Player2 = Player("ismail")
         print(self.Player2.userName + " created.")
 
-
     def begin(self):
+        #Begin settigs to game
         self.Player1.playerDeck()
         self.Player2.playerDeck()
+        for i in range(3):
+            self.Player1.addToActiveCard()
+            self.Player2.addToActiveCard()
 
-        for aCard in range(3):
-            self.Player1.addCard()
-        for bCard in range(3):
-            self.Player2.addCard()
+    def playerInfo(self):
+        #Write players health mana
+        self.Player1.userInfo()
+        self.Player2.userInfo()
+
+    def activeCards(self):
+        #Write player's active cards
+        self.Player1.writeActiveCards()
+        self.Player2.writeActiveCards()
+
+    def player1Active(self):
+        #make player1 active
+        print(self.Player1.userName + " Tour Begin!!")
+        self.Player1.addToActiveCard()
+        self.Player1.makeActivate()
+        self.Player2.makeDeactive()
+        self.activeCards()
+        self.playerInfo()
+
+    def player2Active(self):
+        #make player2 active
+        print(self.Player2.userName + " Tour Begin!!")
+        self.Player2.addToActiveCard()
+        self.Player2.makeActivate()
+        self.Player1.makeDeactive()
+        self.activeCards()
+        self.playerInfo()
+
+    def isGameOver(self):
+        #check someone died
+        if(self.Player1.health <= 0 or self.Player2.health <= 0):
+            return False
+        else:
+            return True
+            if self.Player1.health <= 0:
+                print(self.Player1.userName + " died. "+ self.Player2.userName +" win!")
+            else:
+                print(self.Player2.userName + " died. "+ self.Player1.userName +" win!")
 
     def gameTour(self):
-        print("3-Exit ")
-        menu = 0
-        tour = 0
-        while menu != 3:
-            menu = input()
-
-
-            if tour % 2 == 0:
-                self.Player1.makeActivate()
-                self.Player1.mana +=1
-
-                self.Player1.userInfo()
-                self.Player2.userInfo()
-
-                self.Player1.addToActiveCard()
-
-                self.Player1.writeActiveCards()
-                self.Player2.writeActiveCards()                    
-                
-                print(self.Player1.userName + " choice the card")
-                choice = input()
-                selectedCard = self.Player1.activeCardSelected(choice)            
-                print(self.Player1.userName + " choice the target card")
-                target = input()
-                if(target == self.Player2.userName):
-                    selectedCard.attackToOpponent(self.Player2)              
-                else:
-                    selectedTarget = self.Player2.activeCardSelected(target)
-                    selectedCard.attackToCard(selectedTarget)
-                self.Player1.userInfo()
-                self.Player2.userInfo()
+        #game tour until one player die
+        tour = rnd.randint(0, 1)
+        while self.isGameOver():
+            if tour % 2 == 0:             
+                self.player1Active()
+                while self.Player1.canPlay():                                  
+                    print(self.Player1.userName + " choice the card for attack to opponent")
+                    choice = input()              
+                    selectedCard = self.Player1.activeCardSelected(choice)                 
+                    if selectedCard.mana <= self.Player1.activeMana:                           
+                        selectedCard.attackToOpponent(self.Player2)
+                        self.Player1.rmvCardFromActiveCards(selectedCard) 
+                        self.Player1.activeMana -= selectedCard.mana 
+                        self.isGameOver()             
+                    self.playerInfo()
+                if self.Player1.canPlay() != True:
+                    print(self.Player1.userName + " don't have enough mana for play!")
+                tour += 1
 
             if tour % 2 == 1:
-                self.Player2.makeDeactive()
-                self.Player2.mana +=1     
+                self.player2Active()
+                while self.Player2.canPlay():
+                    print(self.Player2.userName + " choice the card for attack to opponent")
+                    choice = input()
+                    selectedCard = self.Player2.activeCardSelected(choice)
+                    if selectedCard.mana <= self.Player2.activeMana:        
+                        selectedCard.attackToOpponent(self.Player1)
+                        self.Player2.rmvCardFromActiveCards(selectedCard)  
+                        self.Player2.activeMana -= selectedCard.mana
+                        self.isGameOver()                       
+                    self.playerInfo()
+                if self.Player2.canPlay() != True:
+                    print(self.Player2.userName + " don't have enough mana for play!")
+                tour = 0
 
-                self.Player1.userInfo()
-                self.Player2.userInfo()
 
-                self.Player2.addToActiveCard()           
 
-                self.Player2.writeActiveCards()
-                self.Player1.writeActiveCards()     
-                
-                print(self.Player2.userName + " choice the card")
-                choice = input()
-                selectedCard = self.Player2.activeCardSelected(choice)            
-                print(self.Player2.userName + " choice the target card")
-                target = input()
-                if(target == self.Player1.userName):
-                    selectedCard.attackToOpponent(self.Player1)              
-                else:
-                    selectedTarget = self.Player1.activeCardSelected(target)
-                    selectedCard.attackToCard(selectedTarget)
-                self.Player1.userInfo()
-                self.Player2.userInfo()
-            self.Player1.delCard()
-            self.Player2.delCard()   
-            tour +=1
 
             
  
