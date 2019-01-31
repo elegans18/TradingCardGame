@@ -13,7 +13,7 @@ class Game:
         print(self.Player2.userName + " created.")
 
     def begin(self):
-        #Begin settigs to game
+        #Begin settigs to game        
         self.Player1.playerDeck()
         self.Player2.playerDeck()
         for i in range(3):

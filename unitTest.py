@@ -4,15 +4,11 @@ from card import Card
 
 class TestGame(unittest.TestCase):
 
-    def testDeck(self):
+    def testDeckActiveCards(self):
         game = Game()
         game.begin()
         self.assertEqual(len(game.Player1.playerDeckRt()), 17)
         self.assertEqual(len(game.Player2.playerDeckRt()), 17)
-    
-    def testActiveCards(self):
-        game = Game()
-        game.begin()
         self.assertEqual(len(game.Player1.playerActiveCardsRt()), 3)
         self.assertEqual(len(game.Player2.playerActiveCardsRt()), 3)
     
