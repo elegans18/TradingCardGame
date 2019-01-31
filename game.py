@@ -57,6 +57,10 @@ class Game:
             else:
                 print(self.Player2.userName + " died. "+ self.Player1.userName +" win!")
 
+    def changeTour(self):
+        print("Please press enter for next turn!")
+        input()
+
     def gameTour(self):
         #game tour until one player die
         tour = rnd.randint(0, 1)
@@ -76,6 +80,7 @@ class Game:
                 if self.Player1.canPlay() != True:
                     print(self.Player1.userName + " don't have enough mana for play!")
                 tour += 1
+                self.changeTour()
 
             if tour % 2 == 1:
                 self.player2Active()
@@ -92,6 +97,7 @@ class Game:
                 if self.Player2.canPlay() != True:
                     print(self.Player2.userName + " don't have enough mana for play!")
                 tour = 0
+                self.changeTour()
 
 
 

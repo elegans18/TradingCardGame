@@ -20,7 +20,7 @@ class Card:
             if target.health <= 0:
                 print(target.userName + " died. "+ self.userName +" win!")
         if self.mana == 0:
-            print(self.userName + " can't attack to" + target.userName)
+            print(self.userName + " can't attack to " + target.userName)
         #round should switch to opponent
 
     def returnName(self):
